@@ -19,6 +19,5 @@ from AplicacionPrincipal.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('',inicio),
-    path('AplicacionPrincipal/',include('AplicacionPrincipal.urls'))
+    path('',include('AplicacionPrincipal.urls'))
 ]
