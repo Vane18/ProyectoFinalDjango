@@ -10,7 +10,6 @@ class Mensaje(models.Model):
     destinatario_usuario = models.TextField(max_length=50) 
     mensaje = tinymce_models.HTMLField(max_length= 500)
     fecha = models.DateTimeField()
-    visto = models.CharField(max_length=2)
 
 class Anuncio(models.Model):
     creador_id= models.IntegerField()

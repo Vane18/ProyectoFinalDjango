@@ -40,7 +40,7 @@ def enviarMensaje(request, pk=None):
         except:
           return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'Usuario no válido, intente nuevamente.', 'error':'error', 'url':avatar[0].avatar.url  })
         if destinatario:
-            mensaje = Mensaje(remitente_id= request.user.id, remitente_usuario = request.user, destinatario_id = destinatario.id, destinatario_usuario = destinatario.username,  mensaje = request.POST['mensaje'], fecha = datetime.datetime.now(), visto= 'N')
+            mensaje = Mensaje(remitente_id= request.user.id, remitente_usuario = request.user, destinatario_id = destinatario.id, destinatario_usuario = destinatario.username,  mensaje = request.POST['mensaje'], fecha = datetime.datetime.now())
             mensaje.save()
             return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'Mensaje enviado.','success':'success', 'url':avatar[0].avatar.url})
         else:
