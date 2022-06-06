@@ -1,0 +1,37 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Agregar nuevo post</h1>
+                    <span class="subheading">Esta sección es solamente para agregar nuevo post...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block mainModificable %}
+<div class="card-body">
+    <form action="" method="POST" enctype="multipart/form-data" style="color:black">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="" class="form-label">Titulo</label>
+            <input type="text" Required name="titulo" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Descripcion</label>
+            <input type="text" Required name="descripcion" class="form-control">
+        </div>
+         <div class="mb-3">
+            <label for="" class="form-label">Imagen</label>
+            <input type="file" Required name="imagen" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Mis posteos</h1>
+                    <span class="subheading">Esta sección es solamente para ver tus posteos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block mainModificable %}
+    <div class="container" style="color: black;">
+                {% for p in posteos %}
+    
+                       <div> <h1>{{ p.titulo }}</h1></div>
+                                      
+                        {% if p.imagen %}
+                        <p style="display:flex">
+                                <img src="{{ p.imagen.url }}" alt="" style="max-width:300px">
+                              <span style="align-self:center; margin-left:60px"> {{ p.descripcion }}</span> 
+                        </p>
+                        {% else %}
+                                              
+                        {% endif %}
+                        
+                        <div>
+                        <td>
+                            <a href="{% url 'editarPost' p.id %}" class="btn btn-success ">EDITAR POST</a>
+                            <a href="{% url 'borrarPost' p.id %}" class="btn btn-danger ">BORRAR</a>
+                        </td>
+                    </div>
+    <div>              
+        <hr>  
+                {% endfor %}
+                <div class="container text-center">
+                    <a href="{% url 'agregarPost' %}"><button class="btn btn-primary btn-lg" style="width: 800px">AGREGAR NUEVO POST</button></a>
+                </div>
+    
+    <br>
+    
+
+
+{% endblock %}

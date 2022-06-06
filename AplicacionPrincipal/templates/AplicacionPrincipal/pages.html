@@ -1,0 +1,61 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Páginas - Mundo Retro</h1>
+                    <span class="subheading">Bienvenido, estos son los posts que querias ver...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block mainModificable %}
+{%if posteos %}
+<div style="color:black" class="text-center" >
+    
+
+<h2>Todos los posteos:</h2>
+    <div class="post-preview">
+   
+    
+        {% for p in posteos %}
+        
+        <h2 class="post-title">{{p.titulo}}</h2>
+        <img src="{{ p.imagen.url }}" alt="" style="max-width:300px">
+      <li>
+         {{p}}
+      </li>
+      <a href="{% url 'detallePost' p.id %}"><button type="button" class="btn btn-secondary btn-lg btn-block" style="font-family:monospace; margin-bottom: 30px;">Leer más</button></a>
+        {% endfor %} 
+    </div>
+
+</div>
+{%elif posteo%}
+<div style="color:black">
+    <div> <h1>{{ posteo.titulo }}</h1></div>
+    <br>                    
+     {% if posteo.imagen %}
+     <p style="display:flex">
+             <img src="{{ posteo.imagen.url }}" alt="" style="max-width:300px">
+           <span style="align-self:center; margin-left:60px"> {{ posteo.descripcion }}</span> 
+     </p>
+     {% else %}
+                           
+     {% endif %}
+     <a href="{% url 'editarPost' posteo.id %}" class="btn btn-success badge">EDITAR</a>
+     <a href="{% url 'borrarPost' posteo.id %}" class="btn btn-danger badge">BORRAR</a> 
+<div>
+
+{% endif %}
+<br>
+<br>
+<p class="text-center">
+    <a href="javascript:history.go(-1);"><button type="button" class="btn btn-danger">Volver a la página anterior</button></a>
+</p>
+
+{% endblock %}
