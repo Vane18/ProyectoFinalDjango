@@ -1,0 +1,43 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Mensajes enviados - Mundo Retro</h1>
+                    <span class="subheading">Zona de mensajes enviados... nada más.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block mainModificable %}
+<div style="color:black" class="container">
+<h2 class="text-uppercase">Mensajes enviados</h2>
+    <div style="font-style:inherit; font-size:20px">
+   
+    
+        {% for m in mensajes %}
+        <p style="border: ridge rgb(122, 109, 109) 2px;">
+            &nbsp;<b>De:</b> {{m.remitente_usuario}}
+        <br>
+            &nbsp;<b>Para:</b> 
+        {{m.destinatario_usuario}}
+        <br>
+            &nbsp;<b>Mensaje:</b>
+        {{m.mensaje}}
+        <br>
+        </p>
+        {% endfor %} 
+        </p>
+    </div>
+
+    <p class="text-center">
+        <a href="javascript:history.go(-1);"><button type="button" class="btn btn-danger">Volver a la página anterior</button></a>
+    </p>  
+{% endblock %}

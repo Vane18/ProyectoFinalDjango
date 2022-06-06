@@ -1,0 +1,46 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Mensajeria - Mundo Retro</h1>
+                    <span class="subheading">Un lugar para enviar mensajes...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block mainModificable %}
+<div class="container">
+<form action="{% url 'enviarMensaje' %}" method ="POST" id="contactForm">
+    {% csrf_token %}  
+    <div class="text-center">
+        <h1 class="section-heading text-uppercase">Enviar mensaje</h2>
+    </div>
+    <div class="row align-items-stretch mb-5" style="margin-left:32%">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <input class="form-control" name="destinatario" type="text" placeholder="Destinatario" data-sb-validations="required" value="{{destinatario_user}}" style="width: 470px" />
+                <div class="invalid-feedback" data-sb-feedback="destinatario:required">Destinatario</div>
+            </div>
+            <div class="form-group">
+                <p><textarea name="mensaje" cols="40" rows="5" style="width: 470px"></textarea></p>              
+            </div>
+        </div>
+    </div>
+    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" id="enviarMensaje" type="submit" style="width: 30%">Enviar</button></div>
+</form>
+</div>
+<br>
+<p class="text-center">
+    <a href="javascript:history.go(-1);"><button type="button" class="btn btn-danger">Volver a la página anterior</button></a>
+</p>
+<br>
+{% endblock %}

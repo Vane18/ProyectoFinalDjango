@@ -6,8 +6,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Agregar nuevo post</h1>
-                    <span class="subheading">Esta sección es solamente para agregar nuevo post...</span>
+                    <h1>Editar posteo existente</h1>
+                    <span class="subheading">Esta sección es solamente para editar un post... y solo el administrador puede hacerlo :)</span>
                 </div>
             </div>
         </div>
@@ -15,50 +15,49 @@
 </header>
 {% endblock %}
 {% block mainModificable %}
-{% if request.user.username == posteo.usuarioCreador or request.user.is_superuser%}
-<div class="card-body">
-    <form action="" method="POST" enctype="multipart/form-data" style="color:white">
+{% if request.user.is_superuser%}
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data" style="color:black">
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="form-group">
             <label for="" class="form-label">Titulo</label>
             <input type="text" Required name="titulo" value="{{posteo.titulo}}" class="form-control">
         </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Género</label>
-            <select name="genero" class="form-control">
-                <option value="{{posteo.subtitulo}}" selected>{{posteo.subtitulo}}</option>
-                <option value="Clásica">Clásica</option>
-                <option value="Country">Country</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Metal">Metal</option>
-                <option value="Pop">Pop</option>
-                <option value="Tecno">Tecno</option>
-                <option value="Rock">Rock</option>
-                <option value="Otros">Otros</option>
-              </select>
-        </div> 
-        <div class="mb-3">
+        <div class="form-group">
+            <label for="" class="form-label">Subtitulo</label>
+            <input type="text" Required name="subtitulo" value="{{posteo.subtitulo}}" class="form-control">
+        </div>   
+        <div class="form-group">
             <label for="" class="form-label">Descripcion</label>
-            <input type="text" Required name="descripcion" value="{{posteo.descripcion}}" class="form-control">
+            
+            <textarea Required name="descripcion" id="" cols="30" rows="10" class="form-control">{{posteo.descripcion}}</textarea>
+            
         </div>
         <div>
             <label for="" class="form-label">Imagen</label>    
         </div>
-         <div class="mb-3">
+         <div class="form-group">
             
             {% if posteo.imagen %}
-                <img src="{{posteo.imagen.url}}" alt="" style="max-width:300px">
+                <img src="{{posteo.imagen.url}}" alt="" style="max-width:300px">    
             {% endif %}
 
-                 
-            <input type="file" name="imagen" class="form-control">
+            <input type="file" name="imagen" class="form-control" style="margin-top: 40px">
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <br>
+        <button type="submit" class="btn btn-primary text-uppercase" style="width: 100%">Guardar</button>
+        <br>
+        <br>
     </form>
 </div>
 {% else %}
-<div style="color:white">
-<h1>NO PERMITIDO.</h1>
+<div class="container text-center">
+    <h1>Solo el administrador puede realizar esa acción.</h1>
+    <img src="{% static 'AplicacionPrincipal/assets/img/MundoRetro.jpg' %}" style="width: 700px; height:450px" alt="">
+    <br>
+    <a href="{% url 'home' %}"><button type="button" class="btn btn-secondary btn-lg btn-block text-uppercase" style="margin-top: 40px">Ir al inicio</button></a>
+    <br>
+    <br>
 </div>
 {% endif %}
 

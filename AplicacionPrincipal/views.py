@@ -25,7 +25,7 @@ def perfilUsuario(request):
             return render(request, 'AplicacionPrincipal/perfilUsuario.html', {'url':avatar[0].avatar.url})
     
     return render(request, 'AplicacionPrincipal/index.html')    
-
+@login_required
 def about(request):
       if request.user.is_authenticated:      
         avatar = Avatar.objects.filter(user=request.user)
@@ -121,6 +121,7 @@ def agregarPost(request):
         posteo.usuario = request.user
         posteo.fecha = datetime.datetime.now()
         posteo.titulo = request.POST.get('titulo')
+        posteo.subtitulo = request.POST.get('subtitulo')
         posteo.descripcion = request.POST.get('descripcion')
 
         if len(request.FILES) != 0:
@@ -146,7 +147,7 @@ def editarPost(request, pk):
                 os.remove(posteo.imagen.path)
             posteo.imagen = request.FILES['imagen']
         posteo.titulo = request.POST.get('titulo')
-        posteo.subtitulo = request.POST.get('genero')
+        posteo.subtitulo = request.POST.get('subtitulo')
         posteo.descripcion = request.POST.get('descripcion')
         try:
          posteo.save()

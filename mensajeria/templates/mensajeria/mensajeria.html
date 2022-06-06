@@ -1,0 +1,76 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Mensajeria - Mundo Retro</h1>
+                    <span class="subheading">Zona de mensajeria únicamente...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block mainModificable %}
+<div style="color:black">
+
+    
+<h2 class="text-center text-uppercase">Mensajes recibidos</h2>
+    <div class="container" style="font-style:italic; font-size:20px">
+   
+        {% if mensajes %}
+        {% for m in mensajes %}
+
+        <p style="border: ridge rgb(39, 6, 6) 2px;">
+        
+        &nbsp;<b>De:</b> {{m.remitente_usuario}}
+        <br>
+        &nbsp;<b>Para:</b>
+        {{request.user.username}}
+        <br>
+        &nbsp;<b>Mensaje:</b>
+        {{m.mensaje}}
+        <br>
+        </p>
+        {% endfor %} 
+        <div style="margin-bottom:60px">
+            <a class="btn btn-primary" href="{% url 'enviarMensaje' %}" style="width: 100%";>ENVIAR MENSAJE</a>
+            <br>
+            <br>
+            <a class="btn btn-success" href="{% url 'verEnviados' %}" style="width: 100%">MENSAJES ENVIADOS</a>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p class="text-center">
+            <a href="javascript:history.go(-1);"><button type="button" class="btn btn-danger" style="width: 50%">Volver a la página anterior</button></a>
+            </p>
+        </div>
+    </div>
+        {% else %}
+        <div class="container" style="font-style:italic; font-size:20px">
+            <h3 class="text-center" style="color: rgb(173, 89, 89);">Aún no hay mensajes para mostrar</h3>
+            <br>
+            <div style="margin-bottom:60px">
+                <a class="btn btn-primary" href="{% url 'enviarMensaje' %}" style="width: 100%";>ENVIAR MENSAJE</a>
+                <br>
+                <br>
+                <a class="btn btn-success" href="{% url 'verEnviados' %}" style="width: 100%">MENSAJES ENVIADOS</a>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p class="text-center">
+                <a href="javascript:history.go(-1);"><button type="button" class="btn btn-danger" style="width: 50%">Volver a la página anterior</button></a>
+                </p>
+            </div>
+        {% endif %}
+</div>
+<div>  
+
+    
+{% endblock %}

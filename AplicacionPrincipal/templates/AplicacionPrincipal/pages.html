@@ -23,6 +23,7 @@
                 
                 <div class="post-preview">
                 <h2 class="post-title">{{p.titulo}}</h2>
+                <h3 class="post-subtitle">{{p.subtitulo}}</h3>
                 <img src="{{ p.imagen.url }}" alt="" style="max-width:300px">
                 <p class="post-meta">
                 {{p}}
@@ -35,9 +36,10 @@
 </div>
 {% endfor %} 
 {%elif posteo%}
-<div style="color:black">
+<div class="container" style="color:black">
     <div> <h1>{{ posteo.titulo }}</h1></div>
-    <br>                    
+    <br>
+    <div> <h4 style="color:rgb(82, 75, 75); font-style: italic;">{{posteo.subtitulo}}</h4></div>                    
      {% if posteo.imagen %}
      <p style="display:flex">
              <img src="{{ posteo.imagen.url }}" alt="" style="max-width:300px">
@@ -46,8 +48,8 @@
      {% else %}
                            
      {% endif %}
-     <a href="{% url 'editarPost' posteo.id %}" class="btn btn-success badge">EDITAR</a>
-     <a href="{% url 'borrarPost' posteo.id %}" class="btn btn-danger badge">BORRAR</a> 
+     <a href="{% url 'editarPost' posteo.id %}" class="btn btn-success btn-lg btn-block">EDITAR</a>
+     <a href="{% url 'borrarPost' posteo.id %}" class="btn btn-danger btn-lg btn-block">BORRAR</a> 
 <div>
 {%elif not posteo%}
 <h1 class="text-center">NO HAY PAGINAS AÚN</h1>

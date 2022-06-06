@@ -15,16 +15,17 @@
 </header>
 {% endblock %}
 {% block mainModificable %}
-<h1 class="text-center">EDITAR PERFIL DE: {{usuario}}</h1>
-
+<h1 class="text-center text-uppercase">EDITAR PERFIL DE: {{usuario}}</h1>
+<div class="container">
 <form action="{% url 'editarPerfil' %}" method="POST" class="text-center" >
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-secondary btn-lg btn-block">EDITAR PERFIL</button>
+    <button type="submit" class="btn btn-secondary btn-lg btn-block" style="width: 25%">EDITAR PERFIL</button>
     <p></p>
-    <a href="{% url 'agregarAvatar' %}"><button type="button" class="btn btn-secondary btn-lg btn-block">Agregar Avatar</button></a>
+    <a href="{% url 'agregarAvatar' %}"><button type="button" class="btn btn-secondary btn-lg btn-block" style="width: 25%">AGREGAR AVATAR</button></a>
 
 </form>
+</div>
 <br>
 
 

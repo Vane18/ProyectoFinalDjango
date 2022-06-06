@@ -15,10 +15,8 @@
 </header>
 {% endblock %}
 {% block mainModificable %}
-<div class="text-center" >
-<h1 >¿Querés volver a loguearte?</h1>
-<a href="{% url 'login' %}"><button class="btn btn-secondary btn-lg btn-block" style="width:600px">SI</button></a>
-<br>
+<div class="container text-center">
+    <img src="{% static 'AplicacionPrincipal/assets/img/game-over.jpg' %}" style="width: 700px; height:450px" alt="">
 </div>
 <br>
 {% endblock %}

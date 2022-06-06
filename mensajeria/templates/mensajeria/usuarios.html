@@ -1,0 +1,36 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Usuario - Mundo Retro</h1>
+                    <span class="subheading">Un espacio para nuestros usuarios.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block mainModificable %}  
+<div class="container text-center" style="color: rgb(39, 2, 2)">
+    <h1>NUESTROS USUARIOS</h1>
+</div>
+<br>
+{%if usuarios %}
+{% for u in usuarios %}
+            <div class="container">
+                <div  style="float: left;"><h2 class="text-uppercase">{{u.username}} &nbsp;</h2></div>
+                <div style="font-family:monospace;margin-left: 1000px;"><a href="{% url 'enviarMensaje' u.id %}"><button type="button" class="btn btn-secondary btn-lg btn-block">Enviar Mensaje</button></a></div>
+                <hr>
+            </div>
+{% endfor %} 
+{% endif %}
+
+{% endblock %}
+
+

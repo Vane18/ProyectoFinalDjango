@@ -16,17 +16,36 @@
 {% endblock %}
 {% block mainModificable %}
 <h1 class="text-center">MI PERFIL</h1>
-
-<div class="container">
-    <h2 >Este es el perfil de: {{user}}</h2>
-    <img src="{{url}}" alt="" width="200px" height="200px" class="rounded-circle">
+<br>
+<div>
+<h2 class="text-uppercase text-center">Este es el perfil de: {{user}}</h2>
+<br>
+<div class="container d-flex justify-content-center">
+    <img src="{{url}}" alt="" width="300px" height="300px" class="rounded-circle">
 </div>
 <div class="container">
     <br>
-<a href="{% url 'agregarPost' %}"><button class="btn btn-secondary btn-lg btn-block">Agregar nuevo post</button></a>
+    <div>
+    <a href="{% url 'agregarPost' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Agregar nuevo post</button></a>
     <br>
     <br>
-<a href="{% url 'verPost' %}"><button class="btn btn-secondary btn-lg btn-block">Ver mis posts</button></a>
+    <a href="{% url 'verPost' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Ver mis posts</button></a>
+    <br>
+    <br>
+    <a href="{% url 'editarPerfil' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Editar mi perfil</button></a>
+    <br>
+    <br>
+    <a href="{% url 'agregarAvatar' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Editar mi Avatar</button></a>
+    <br>
+    <br>
+    <a href="{% url 'enviarMensaje' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Enviar mensaje a un usuario</button></a>
+    <br>
+    <br>
+    <a href="{% url 'verEnviados' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Ver mensajes enviados</button></a>
+    <br>
+    <br>
+    <a href="{% url 'mensajeria' %}"><button class="btn btn-secondary btn-lg btn-block text-uppercase" style="width: 100%">Ver mensajes recibidos</button></a>
     <p></p>
+    </div>
 </div>
 {% endblock %}
