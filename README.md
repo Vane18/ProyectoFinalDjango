@@ -23,3 +23,5 @@ Desde Home o Pages vamos a poder visualizar los post, desde el botón de Leer m�
 de cada posteo, allí solo el administrador podrá editar o borrar un post independientemente de quien lo haya creado.
 
 Dentro del footer tenemos un pequeño botón con una imagen que se puede seleccionar, nos llevará al GitHub
+video:
+https://www.youtube.com/watch?v=2lujl3tl8zE&t=1s
