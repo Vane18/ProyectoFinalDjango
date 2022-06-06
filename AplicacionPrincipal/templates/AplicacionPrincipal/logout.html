@@ -1,0 +1,24 @@
+{% extends "AplicacionPrincipal/padre.html" %}
+{% load static %}
+{% block headerModificable %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Mundo Retro</h1>
+                    <span class="subheading">Adiós, espero que pronto regreses :D</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block mainModificable %}
+<div class="text-center" >
+<h1 >¿Querés volver a loguearte?</h1>
+<a href="{% url 'login' %}"><button class="btn btn-secondary btn-lg btn-block" style="width:600px">SI</button></a>
+<br>
+</div>
+<br>
+{% endblock %}

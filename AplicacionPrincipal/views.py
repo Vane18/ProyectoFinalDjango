@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from django.shortcuts import render
 from .forms import *
 from .models import *
@@ -8,12 +9,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def inicio(request):
+    posteos = Posteo.objects.all()
     if request.user.is_authenticated:      
         avatar = Avatar.objects.filter(user=request.user)
         if avatar:
-            return render(request, 'AplicacionPrincipal/index.html', {'url':avatar[0].avatar.url})
-    
-    return render(request, 'AplicacionPrincipal/index.html')    
+            return render(request, 'AplicacionPrincipal/index.html', {'posteos':posteos,'url':avatar[0].avatar.url})
+    return render(request, 'AplicacionPrincipal/index.html',{'posteos':posteos})    
+
 
 #--------------PERFIL DEL USUARIO------------#
 def perfilUsuario(request):
@@ -41,7 +43,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 avatar = Avatar.objects.filter(user=request.user)
-                return render(request,'AplicacionPrincipal/index.html',{'usuario':usuario,'mensaje':'Bienvenido','url':avatar[0].avatar.url})
+                return render(request,'AplicacionPrincipal/index.html',{'usuario':usuario,'mensaje':'BIENVENIDO A MUNDO RETRO','url':avatar[0].avatar.url})
             else:
                 return render(request,'AplicacionPrincipal/loginerror.html',{'mensaje':'El usuario no existe, vuelva a intentarlo'})
         else:
@@ -101,6 +103,7 @@ def agregarAvatar(request):
                 avatarViejo.delete()
              avatar = Avatar(user=user,avatar= formulario.cleaned_data['avatar'])
              avatar.save()
+             avatar = Avatar.objects.filter(user=request.user)
              return render(request,'AplicacionPrincipal/index.html', {'usuario': user , 'mensaje': 'Avatar cambiado exitosamente','url':avatar[0].avatar.url})
     else:
         formulario=AvatarForm()
@@ -154,24 +157,9 @@ def editarPost(request, pk):
 
     return render(request, 'AplicacionPrincipal/editPost.html', {'posteo': posteo, 'url':avatar[0].avatar.url})
 
-#-----BORRADO-------    
-@login_required
-def borrarPost(request, pk):
-    avatar = Avatar.objects.filter(user=request.user)
-    posteo = Posteo.objects.get(id=pk)
-    user = request.user
-#chequeo si el usuario se encuentra en el grupo de usuarios comunes.
-    if user.groups.filter(name='Usuarios_Comunes').exists():
-        return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'NO PERMITIDO.', 'url':avatar[0].avatar.url })
-    if len(posteo.imagen) > 0 :
-        os.remove(posteo.imagen.path)
-    posteo.delete()
-    return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'Posteo eliminado exitosamente.', 'url':avatar[0].avatar.url })
-
 #----- VER -----
 @login_required
 def verPost(request):
-    
     user=User.objects.get(username=request.user)
     avatar = Avatar.objects.filter(user=request.user)
     posteos = Posteo.objects.filter(usuario=user).order_by('id').reverse()
@@ -184,23 +172,27 @@ def verPost(request):
 @login_required
 def pages(request):
     avatar = Avatar.objects.filter(user=request.user)
-    user = request.user
-    #chequeo si el usuario se encuentra en el grupo de usuarios comunes.
-    if user.groups.filter(name='Usuarios_Comunes').exists():
-        return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'NO PERMITIDO.', 'url':avatar[0].avatar.url })
     posteos = Posteo.objects.all()
     return render(request, 'AplicacionPrincipal/pages.html', {'posteos':posteos, 'url':avatar[0].avatar.url} )
+
 @login_required
 def detallePost(request, pk):
     avatar = Avatar.objects.filter(user=request.user)
-    user = request.user
-    #chequeo si el usuario se encuentra en el grupo de usuarios comunes.
-    if user.groups.filter(name='Usuarios_Comunes').exists():
-        return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'NO PERMITIDO.', 'url':avatar[0].avatar.url })
-    #validamos que tenga un objeto, sino error.
-    try:
-        posteo = Posteo.objects.get(id=pk)
-    except:
-        return render(request, 'AplicacionPrincipal/index.html', {'mensaje': 'No hay páginas aún', 'error':'error', 'url':avatar[0].avatar.url} )   
-
+    posteo = Posteo.objects.get(id=pk)
     return render(request, 'AplicacionPrincipal/pages.html', {'posteo':posteo, 'url':avatar[0].avatar.url} )   
+
+#----------------ELIMINAR POSTEO---------------------------#
+@login_required
+def borrarPost(request, pk):
+    avatar = Avatar.objects.filter(user=request.user)
+    posteo = Posteo.objects.get(id=pk)
+    user = request.user
+#chequeo si el usuario es administrador
+    if (user.groups.filter(name='Admin').exists()):
+        if len(posteo.imagen) > 0 :
+            os.remove(posteo.imagen.path)
+            posteo.delete()
+            return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'Posteo eliminado exitosamente.', 'url':avatar[0].avatar.url })
+    else:
+        return render (request, 'AplicacionPrincipal/index.html', {'mensaje': 'Solo el administrador puede realizar esa acción.', 'url':avatar[0].avatar.url })
+    

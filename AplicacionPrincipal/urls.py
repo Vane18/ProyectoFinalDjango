@@ -8,7 +8,7 @@ urlpatterns = [
      path('about',about,name='about'),
      path('login',login_request,name='login'),
      path('register',register,name="register"),
-     path('logout', LogoutView.as_view(template_name="AplicacionPrincipal/index.html"), name='logout'),
+     path('logout', LogoutView.as_view(template_name="AplicacionPrincipal/logout.html"), name='logout'),
      path('editarPerfil',editarPerfil,name='editarPerfil'),
       path('agregarAvatar',agregarAvatar,name='agregarAvatar'),
       path('perfilUsuario',perfilUsuario,name='perfilUsuario'),
@@ -18,6 +18,7 @@ urlpatterns = [
       path('verPost', verPost, name='verPost'),
       path('pages', pages, name='pages'),
       path('pages/<str:pk>', detallePost, name="detallePost"),
+      path('borrarPost/<str:pk>', borrarPost, name='borrarPost'),
 
 ]
 

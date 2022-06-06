@@ -22,8 +22,8 @@ class Posteo(models.Model):
     usuario = models.TextField(max_length=50)
     fecha =  models.DateField()
     titulo = models.TextField(max_length=50)
+    subtitulo = models.TextField(max_length=50)
     descripcion = models.TextField(max_length=500)
     imagen = models.ImageField(upload_to=filepath, null=True, blank=True)
-
     def __str__(self):
         return "Posteado por: " + self.usuario + " el " + str(self.fecha)

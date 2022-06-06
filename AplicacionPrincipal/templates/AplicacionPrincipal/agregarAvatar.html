@@ -15,12 +15,12 @@
 </header>
 {% endblock %}
 {% block mainModificable %}
-<h1 class="text-center">EDITAR AVATAR DE: {{usuario}}</h1>
+<h1 class="text-center text-uppercase">EDITAR AVATAR DE: {{usuario}}</h1>
 
 <form action="{% url 'agregarAvatar' %}"  method="POST" enctype="multipart/form-data"  class="text-center">
     {% csrf_token %}
     {{ formulario.as_p }}
-    <button type="submit" class="btn btn-secondary btn-lg btn-block">Agregar Avatar</button>    
+    <button type="submit" class="btn btn-secondary btn-lg btn-block text-uppercase">Agregar Avatar</button>    
   
     <p></p>
 
